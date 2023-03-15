@@ -13,5 +13,10 @@ La distance de Pearson est un coefficient de corrélation qui mesure la similari
 
 Le script lit les deux fichiers audio et calcule le coefficient de corrélation de Pearson entre les deux signaux. Si les fichiers audio ont des fréquences d'échantillonnage différentes, le script affiche un message d'erreur et s'arrête. Si les fichiers audio ont la même fréquence d'échantillonnage, le script calcule la distance de Pearson et l'affiche à l'écran.
 
-
+**Partie vidéo:**
+* **Objectif:** La tache à effectuer est à partir d'une Vidéo MP4 de rebonds de balle de pingpong, de pouvoir ressortir une liste contenant les instants de chaque rebond.
+* **Protocole expérimental**: Vu la compléxité de la tache,on commence d'abors par travailler sur une vidéo contenant 1 seul rebond dans des condtions favorables:(balle blanche, fond foncé, caméra fixe,vidéo ralentie)
+* **Etapes:** 
+        1. Soustraction de fond: On soustraie d'abords l'arrière plan.
+        2. 
 
