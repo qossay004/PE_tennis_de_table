@@ -25,7 +25,8 @@ Caméra fixe;
 Arrière plan foncé et uni;  
 Balle blanche;   
 Un seul rebond à la fois.  
-
+**Tâche1: Soustraction de fond**
+**Tâche2:Détéction du rebond**
 **Méthode "delta de coordonnées":**  
 Le code aura comme entrée la vidéo de soustraction de fond, et comme sortie 'True' s'il y a effectivement changement de signe du delta, et 'False' si non.
 
