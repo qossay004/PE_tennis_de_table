@@ -13,19 +13,20 @@ La distance de Pearson est un coefficient de corrélation qui mesure la similari
 
 Le script lit les deux fichiers audio et calcule le coefficient de corrélation de Pearson entre les deux signaux. Si les fichiers audio ont des fréquences d'échantillonnage différentes, le script affiche un message d'erreur et s'arrête. Si les fichiers audio ont la même fréquence d'échantillonnage, le script calcule la distance de Pearson et l'affiche à l'écran.
 
-**Partie vidéo:
+**Partie vidéo:  
 L'objectif:** de la partie vidéo est d'avoir en entrée une vidéo de rebonds de balle de pingpong, et de pouvoir retourner en sortie une liste contenant les instants de chaque rebond.\\
 Ainsi pour atteindre cet objectif, on répartit le travail en **3 tâches:** la soustraction d'image, le tracking de centre de gravité et la détéction du changement de trajectoire.  
+
+**protocole expérimental**  
 Pour commencer, il faut clarifier notre  **protocole expérimental**. Vu la complexité des tâches, on se place pour avoir les premiers résultats dans des conditions simples et favorables, notamment:  
 
 Vidéo prise en ralentit;  
-
 Caméra fixe;  
-
 Arrière plan foncé et uni;  
-
 Balle blanche;   
+Un seul rebond à la fois.  
 
-Un seul rebond à la fois.
+**Méthode "delta de coordonnées":**  
+Le code aura comme entrée la vidéo de soustraction de fond, et comme sortie 'True' s'il y a effectivement changement de signe du delta, et 'False' si non.
 
 
