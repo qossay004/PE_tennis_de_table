@@ -1,0 +1,61 @@
+import cv2
+import numpy as np
+
+# Définir le nom de fichier vidéo et le seuil de la ligne de seuillage
+filename = "01_REBOND_RALENTI.mp4"
+THRESHOLD = 200
+
+# Ouvrir la vidéo et récupérer les informations sur la vidéo
+cap = cv2.VideoCapture(filename)
+fps = cap.get(cv2.CAP_PROP_FPS)
+frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+
+# Initialiser les variables
+prev_center_y = 0
+delta = 0
+bounce_frame = 0
+
+# Boucler sur chaque frame de la vidéo
+for i in range(frame_count):
+    # Lire la frame courante
+    ret, frame = cap.read()
+    if not ret:
+        break
+    
+    # Convertir la frame en niveaux de gris et appliquer une ligne de seuillage
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    _, thresh = cv2.threshold(gray, THRESHOLD, 255, cv2.THRESH_BINARY)
+
+    # Trouver les contours de l'objet (la balle)
+    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    # Si on a trouvé un contour, calculer la position de la balle
+    if len(contours) > 0:
+        # Trouver le contour le plus grand
+        max_contour = max(contours, key=cv2.contourArea)
+
+        # Trouver le centre de la balle
+        (x, y), radius = cv2.minEnclosingCircle(max_contour)
+        center_x, center_y = int(x), int(y)
+
+        # Calculer la variation de l'altitude de la balle
+        if i > 0:
+            delta = center_y - prev_center_y
+
+        # Mettre à jour les variables
+        prev_center_y = center_y
+
+        # Si la variable delta change de signe et si la balle se déplace vers le bas, on a atteint le rebond
+        if delta < 0 and center_y > prev_center_y:
+            bounce_frame = i
+            break
+
+# Calculer l'instant du rebond en utilisant le nombre de frames par seconde (fps)
+bounce_time = bounce_frame / fps
+
+# Afficher l'instant du rebond
+print("Le rebond a eu lieu à {:.2f} secondes.".format(bounce_time))
+
+# Libérer les ressources
+cap.release()
+cv2.destroyAllWindows()
